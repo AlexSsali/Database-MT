@@ -18,7 +18,7 @@ class Datadb():
     def insert(self,id,name,dop,top,item_requested_for):
         conn=psycopg2.connect("dbname='mainttracker' user='postgres' password='mine' host='localhost' port='5432'")
         cur=conn.cursor()
-        cur.execute("INSERT INTO requestTable VALUES(%s,%s,%s)", (id,name,dop,top,item_requested_for))
+        cur.execute("INSERT INTO requestTable VALUES ('{}','{}','{}','{}','{}')" .format(id,name,dop,top,item_requested_for))
         conn.commit()
         conn.close()
 

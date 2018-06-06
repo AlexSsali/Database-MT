@@ -1,33 +1,34 @@
 from app.db import Datadb
+from app.db import Datadb
 
 dbscript = Datadb()
 
 class User_request():
+    def __init__():
+        self.conn = psycopg2.connect("dbname='mainttracker' username='postgres' password='main' host='localhost' port='5432'")
+        self.cur = self.conn.cursor()
     
-    # def __init__(self):
-    #     # self.dbscript
-        
+
     def create_request(self, id, name, dop, top, item_requested_for):
-        new_request={'id':id,'name':name,'dop':dop,'top':top,'item requested for':item_requested_for}
-        self.details.append(new_request)
+        # new_request={'id':id,'name':name,'dop':dop,'top':top,'item requested for':item_requested_for}
+        dbscript.insert(id, name, dop, top, item_requested_for)
+        # self.details.append(new_request)
         return 'Request added'
-        # dbscript.create_req(new_request)
+        
 
     def get_requests(self):
-        return self.details
-
+        self.cur.execute("SELECT * from requests")
+        allreq = self.cur.fetchall()
+        return allreq(rows)
+        
     def get_request_for_one_user(self, id):
-        for detail in self.details:
-            if detail['id'] == id:
-                return detail
-        else:
-            return 'request does not exist' 
+        self.cur.execute("SELECT *FROM requestTable WHERE id = '{}' .format(id)")
+        usr_req = self.cur.fetchone()
+        return usr_req
 
-    def update_request(self, name, new_name):
-       for detail in self.details:
-            if detail['name'] == name:
-                detail['name'] = new_name
-                return detail
+    def update_request(self, name, item_requested_for,id):
+        self.cur.execute("UPDATE request set name='{}', item_requested_for='{}' WHERE id='{}'". format(name, item_requested_for))
+        self.conn.commit()
 
 class User_auth():
     def __init__(self):

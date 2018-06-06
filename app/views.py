@@ -24,7 +24,7 @@ def user_detail(id):
 def create_item():
     create = request.get_json()
     create = user_request.create_request(create['id'],create['name'],create['dop'],create['top'],create['item requested for'])
-    return jsonify({'message':create}),201
+    return jsonify({message:'Request placed'}),201
 
 #update 
 @app.route('/api/v1/request/update/<string:name>', methods=['PUT'])
