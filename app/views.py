@@ -1,11 +1,16 @@
 from flask import Flask, jsonify, request
 from app import app
 import json
+import uuid
+from werkzeug.security import generate_password_hash
 from .models import User_request
 from .models import User_auth
 
+app.config['SECRET_KEY'] = 'thisissecret'
+app.config['*****']
+
 user_request = User_request()
-user_log = User_auth
+user_log = User_auth() 
 
 #get all requests for all users
 @app.route('/api/v1/request/', methods=['GET'])
@@ -45,7 +50,11 @@ def user_sign_in():
 def user_sign_up():
     data = request.get_json()
 
-    data = user_log.sign_up(data['name'], data['username'],data['password'],data['email'])
+    hashed_password = generate_password_hash(data['password'], method='sha256')
+    new_user = user(public_id=str(uuid.uuid4()), name=data['name'],pasword=hashed_password,amdin=False)
+    user_log.sign_up()
+    # data = user_log.sign_up(data['name'], data['username'],data['password'],data['email'])
+    
     return jsonify({'message':'Account successfully created'}), 201
 
 
