@@ -17,16 +17,16 @@ class Datadb():
     def get_requests(self):
         self.cur.execute("SELECT * FROM requestTable")
         allreq = self.cur.fetchall()
-        return allreq(allreq)
+        return allreq
         
     def get_request_for_one_user(self, id):
         self.cur.execute("SELECT *FROM requestTable WHERE id = '{}' ".format(id))
         usr_req = self.cur.fetchone()
         return usr_req
 
-    # def update_request(self, name):
-    #     self.cur.execute("UPDATE requestTable set name='{}', name='{}' WHERE id='{}'". format(name))
-    #     self.conn.commit()
+    def update_request(self, id, name):
+        self.cur.execute("UPDATE requestTable set name='{}' WHERE id='{}'" .format(name, id))
+        self.conn.commit()
 
     # def sign_up(self):
     #     self.cur.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER,name TEXT,dop INTEGER, top INTEGER, item_requested_for TEXT)")

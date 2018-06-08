@@ -17,18 +17,18 @@ class User_request():
         reqs = dbscript.get_requests()
         for req in reqs:
             return self.reqs
-
-    # def get_request_for_one_user(self, id):
-    #     for detail in self.details:
-    #         if detail['id'] == id:
-    #             return detail
+            
+#     def get_request_for_one_user(self, id):
+#         for detail in details:
+#             if detail['id'] == id:
+#                 return detail
 #         else:
 #             return 'request does not exist' 
 
 #     def update_request(self, name, item_requested_for):
-#        for detail in self.details:
+#        for detail in self.modify:
 #             if detail['name'] == name:
-#                 detail['name'] = new_name
+#                 detail['name'] = modified
 #                 return detail
 
 # class User_auth():
